@@ -949,12 +949,7 @@ RedisClient.prototype.hmset = function (args, callback) {
               args[1][key] = args[1][key].toString();
             }
             if (typeof args[1][key] !== "string") {
-                var err = new Error("hmset expected value to be a string", key, ":", args[1][key]);
-                if (callback) {
-                    return callback(err);
-                } else {
-                    throw err;
-                }
+                args[1][key] = JSON.stringify(args[1][key]);
             }
             tmp_args.push(args[1][key]);
         }
